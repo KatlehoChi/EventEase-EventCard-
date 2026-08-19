@@ -73,13 +73,13 @@ h1:focus {
 }
 
 :root {
-  --ink: #22201d;
-  --paper: #f5f1e9;
-  --coral: #e8785d;
-  --teal: #80aaa1;
-  --gold: #e6b95c;
-  --muted: #716b63;
-  --line: rgba(34, 32, 29, 0.18);
+  --ink: #08243d;
+  --paper: #f2f8fb;
+  --blue: #1769d1;
+  --sky: #75c9e8;
+  --lime: #c7ed45;
+  --muted: #4c6576;
+  --line: rgba(8, 36, 61, 0.18);
 }
 
 html,
@@ -128,7 +128,7 @@ a {
   text-transform: uppercase;
 }
 .nav-link.active {
-  color: var(--gold);
+  color: var(--lime);
 }
 .nav-scrollable {
   padding: 2rem 1.5rem;
@@ -150,7 +150,7 @@ h2 {
 }
 h1 em,
 h2 em {
-  color: var(--coral);
+  color: var(--blue);
   font-style: italic;
 }
 .button {
@@ -178,7 +178,7 @@ h2 em {
 }
 
 .home-hero {
-  background: var(--coral);
+  background: var(--blue);
   display: flex;
   justify-content: space-between;
   min-height: 35rem;
@@ -202,14 +202,14 @@ h2 em {
   z-index: 1;
 }
 .home-hero .eyebrow {
-  color: var(--ink);
+  color: var(--lime);
 }
 .home-hero h1 {
   font-size: clamp(5rem, 12vw, 10rem);
   margin: 0 0 2rem;
 }
 .home-hero h1 em {
-  color: var(--paper);
+  color: var(--lime);
 }
 .home-hero__copy > p:not(.eyebrow) {
   font-size: 1.05rem;
@@ -295,14 +295,14 @@ h2 em {
 .event-card:hover {
   transform: translateY(-0.35rem);
 }
-.event-card.coral {
-  background: var(--coral);
+.event-card.blue {
+  background: var(--blue);
 }
-.event-card.gold {
-  background: var(--gold);
+.event-card.lime {
+  background: var(--lime);
 }
-.event-card.teal {
-  background: var(--teal);
+.event-card.sky {
+  background: var(--sky);
 }
 .event-card__topline,
 .event-card__actions {
@@ -374,14 +374,14 @@ h2 em {
 .detail-hero {
   padding: 2rem 5rem 5rem;
 }
-.detail-hero.coral {
-  background: var(--coral);
+.detail-hero.blue {
+  background: var(--blue);
 }
-.detail-hero.gold {
-  background: var(--gold);
+.detail-hero.lime {
+  background: var(--lime);
 }
-.detail-hero.teal {
-  background: var(--teal);
+.detail-hero.sky {
+  background: var(--sky);
 }
 .back-link {
   display: inline-block;
@@ -482,7 +482,7 @@ h2 em {
 }
 .success-state__mark {
   align-items: center;
-  background: var(--teal);
+  background: var(--lime);
   border-radius: 50%;
   display: flex;
   font-size: 2rem;
@@ -503,7 +503,7 @@ h2 em {
   margin-left: 1.5rem;
 }
 .session-status__dot {
-  background: var(--teal);
+  background: var(--lime);
   border-radius: 50%;
   display: inline-block;
   height: 0.45rem;
@@ -520,7 +520,7 @@ h2 em {
   padding: 1.25rem;
 }
 .attendance-tracker__label {
-  color: var(--gold);
+  color: var(--lime);
   font-size: 0.68rem;
   font-weight: bold;
   letter-spacing: 0.12em;
