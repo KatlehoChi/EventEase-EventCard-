@@ -9,7 +9,7 @@ public static class EventCatalog
             Id = 1,
             Name = "Future of Work Summit",
             Date = new DateTime(2026, 9, 18),
-            Location = "Austin Convention Center",
+            Location = "Gallagher Convention Centre, Midrand",
             Category = "Conference",
             AccentClass = "blue",
             Description = "A sharp, practical day for leaders shaping thoughtful workplaces, stronger teams, and what comes next."
@@ -19,7 +19,7 @@ public static class EventCatalog
             Id = 2,
             Name = "After Hours: The Makers Table",
             Date = new DateTime(2026, 10, 2),
-            Location = "The Foundry, Brooklyn",
+            Location = "Sun City, Sandton",
             Category = "Social",
             AccentClass = "lime",
             Description = "An intimate evening of good food, curious conversations, and hands-on creative sessions with local makers."
@@ -29,7 +29,7 @@ public static class EventCatalog
             Id = 3,
             Name = "Designing For Momentum",
             Date = new DateTime(2026, 10, 24),
-            Location = "The Assembly, Chicago",
+            Location = "The Assembly, Jo'Burg",
             Category = "Workshop",
             AccentClass = "sky",
             Description = "A focused workshop for product teams ready to turn useful ideas into work people can feel."
