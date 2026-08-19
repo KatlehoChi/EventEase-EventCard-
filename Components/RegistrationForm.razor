@@ -1,0 +1,92 @@
+@using System.ComponentModel.DataAnnotations
+@using EventEase.Models
+@using EventEase.Services
+@inject UserSessionState Session
+@rendermode InteractiveServer
+@page "/register/{id}"
+
+@if (Event is null)
+{
+    <section class="empty-state">
+        <p class="eyebrow">Registration</p>
+        <h1>We couldn't find that event.</h1>
+        <a class="button button--dark" href="/events">Back to events</a>
+    </section>
+}
+else if (IsRegistered)
+{
+    <section class="success-state">
+        <span class="success-state__mark">✓</span>
+        <p class="eyebrow">You're on the list</p>
+        <h1>See you at<br /><em>@Event.Name.</em></h1>
+        <p>We'll send the details to @registration.Email.</p>
+        <a class="button button--dark" href="/events">Find another event</a>
+    </section>
+}
+else
+{
+    <section class="registration-layout">
+        <div class="registration-intro">
+            <a class="back-link" href="/events/@Event.Id">← Event details</a>
+            <p class="eyebrow">Save your spot</p>
+            <h1>Join us for<br /><em>@Event.Name.</em></h1>
+            <p>@Event.Date.ToString("MMMM d, yyyy")<br />@Event.Location</p>
+        </div>
+        <div class="registration-panel">
+            <p class="eyebrow">Registration form</p>
+            <h2>Tell us who's coming.</h2>
+
+            <EditForm Model="@registration" OnValidSubmit="HandleValidSubmit">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <label for="name">Full name</label>
+                <InputText id="name" class="form-input" @bind-Value="registration.Name" />
+                <ValidationMessage For="@(() => registration.Name)" />
+                <label for="email">Email address</label>
+                <InputText id="email" type="email" class="form-input" @bind-Value="registration.Email" />
+                <ValidationMessage For="@(() => registration.Email)" />
+                <button class="button button--dark form-submit" type="submit">Complete registration <span aria-hidden="true">→</span></button>
+            </EditForm>
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter] public string Id { get; set; } = string.Empty;
+
+    private RegistrationModel registration = new();
+    private Event? Event => int.TryParse(Id, out var eventId) ? EventCatalog.Find(eventId) : null;
+    private bool IsRegistered => Event is { } eventItem && Session.IsRegistered(eventItem.Id);
+
+    protected override void OnInitialized()
+    {
+        if (Session.HasUser)
+        {
+            registration.Name = Session.UserName ?? string.Empty;
+            registration.Email = Session.Email ?? string.Empty;
+        }
+    }
+
+    private void HandleValidSubmit()
+    {
+        if (Event is null)
+        {
+            return;
+        }
+
+        Session.SetUser(registration.Name, registration.Email);
+        Session.RegisterFor(Event.Id);
+    }
+
+    public class RegistrationModel
+    {
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(80, MinimumLength = 2, ErrorMessage = "Name must be between 2 and 80 characters")]
+        public string Name { get; set; } = string.Empty;
+
+        [Required(ErrorMessage = "Email is required")]
+        [EmailAddress(ErrorMessage = "Invalid email format")]
+        [StringLength(160, ErrorMessage = "Email must be 160 characters or fewer")]
+        public string Email { get; set; } = string.Empty;
+    }
+}

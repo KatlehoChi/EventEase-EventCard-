@@ -1,0 +1,29 @@
+@using EventEase.Models
+
+@if (Event is { IsValid: true })
+{
+<article class="event-card @Event.AccentClass">
+    <div class="event-card__topline">
+        <span class="event-card__category">@Event.Category</span>
+        <span class="event-card__number">0@Event.Id</span>
+    </div>
+    <div class="event-card__date">
+        <span>@Event.Date.ToString("MMM")</span>
+        <strong>@Event.Date.Day</strong>
+    </div>
+    <div class="event-card__content">
+        <h2>@Event.Name</h2>
+        <p class="event-card__location">@Event.Location</p>
+        <p>@Event.Description</p>
+    </div>
+    <div class="event-card__actions">
+        <a class="text-link" href="/events/@Event.Id">View details <span aria-hidden="true">↗</span></a>
+        <a class="circle-link" href="/register/@Event.Id" aria-label="Register for @Event.Name">→</a>
+    </div>
+</article>
+}
+
+@code {
+    [Parameter, EditorRequired]
+    public Event Event { get; set; } = default!;
+}

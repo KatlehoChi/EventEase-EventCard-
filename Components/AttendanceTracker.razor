@@ -1,0 +1,36 @@
+@using EventEase.Services
+@inject UserSessionState Session
+
+<section class="attendance-tracker" aria-live="polite">
+    @if (!Session.IsRegistered(EventId))
+    {
+        <p class="attendance-tracker__label">Planning to come?</p>
+        <a class="button button--light" href="/register/@EventId">Register to attend <span aria-hidden="true">→</span></a>
+    }
+    else if (Session.IsAttending(EventId))
+    {
+        <div>
+            <p class="attendance-tracker__label">Your attendance</p>
+            <strong>You're marked as attending.</strong>
+        </div>
+        <button class="button button--outline" type="button" @onclick="ToggleAttendance">Remove attendance</button>
+    }
+    else
+    {
+        <div>
+            <p class="attendance-tracker__label">Your attendance</p>
+            <strong>Registration confirmed.</strong>
+        </div>
+        <button class="button button--light" type="button" @onclick="ToggleAttendance">Mark as attending <span aria-hidden="true">→</span></button>
+    }
+</section>
+
+@code {
+    [Parameter]
+    public int EventId { get; set; }
+
+    private void ToggleAttendance()
+    {
+        Session.ToggleAttendance(EventId);
+    }
+}

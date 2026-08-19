@@ -1,0 +1,45 @@
+@page "/events/{Id:int}"
+@using EventEase.Models
+@rendermode InteractiveServer
+
+<PageTitle>@(Event?.Name ?? "Event details") | EventEase</PageTitle>
+
+@if (Event is null)
+{
+    <section class="empty-state">
+        <p class="eyebrow">Event not found</p>
+        <h1>That gathering has moved on.</h1>
+        <a class="button button--dark" href="/events">Browse upcoming events</a>
+    </section>
+}
+else
+{
+    <section class="detail-hero @Event.AccentClass">
+        <a class="back-link" href="/events">← All events</a>
+        <p class="eyebrow">@Event.Category</p>
+        <h1>@Event.Name</h1>
+        <div class="detail-meta">
+            <span>@Event.Date.ToString("dddd, MMMM d, yyyy")</span>
+            <span>@Event.Location</span>
+        </div>
+    </section>
+
+    <section class="detail-body">
+        <div>
+            <p class="eyebrow">The good part</p>
+            <h2>Come for the event.<br /><em>Stay for the feeling.</em></h2>
+        </div>
+        <div class="detail-copy">
+            <p>@Event.Description</p>
+            <p>EventEase takes care of the details so you can be present for the people, conversations, and moments that make the day worth remembering.</p>
+            <AttendanceTracker EventId="Event.Id" />
+        </div>
+    </section>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    private Event? Event => EventCatalog.Find(Id);
+}

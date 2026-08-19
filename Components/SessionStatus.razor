@@ -1,0 +1,15 @@
+@using EventEase.Services
+@inject UserSessionState Session
+@rendermode InteractiveServer
+
+@if (Session.HasUser)
+{
+    <span class="session-status" title="Your registration session is active">
+        <span class="session-status__dot" aria-hidden="true"></span>
+        @Session.UserName's session
+    </span>
+}
+else
+{
+    <span class="session-status">Guest session</span>
+}
