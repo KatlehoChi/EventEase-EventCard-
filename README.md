@@ -75,3 +75,33 @@ Program.cs                    Application and service configuration
 The event catalog is intentionally in memory for this learning project. `UserSessionState` is registered as a scoped service, so registration and attendance remain available while the user stays in the same Blazor Server circuit. Restarting the application clears this state.
 
 For production persistence, replace the in-memory catalog and session service with a database-backed repository and an authenticated user or server-side session store.
+
+## How Copilot Assisted
+
+Copilot supported the EventEase project across three development activities:
+
+### Activity 1: Foundation
+
+- Scaffolded the Blazor Web App structure.
+- Created the `Event` model and mock event catalog.
+- Built the reusable `EventCard` component with event name, date, location, and description fields.
+- Added routing for event listings, details, registration, and fallback pages.
+- Suggested data-binding syntax for the registration form.
+
+### Activity 2: Debugging and Optimization
+
+- Identified invalid event data and added `Event.IsValid` checks.
+- Improved handling for missing event IDs and unknown routes.
+- Added form validation for required names, name length, and email format.
+- Optimized event rendering with `Virtualize` and stable `@key` values.
+- Helped test normal, invalid, and missing-route scenarios.
+
+### Activity 3: Advanced Features
+
+- Designed the scoped `UserSessionState` service for registration and attendance state.
+- Connected the registration form to session state so user details persist during navigation.
+- Added the `AttendanceTracker` component for marking registered events as attending.
+- Added the `SessionStatus` component to show the active user session.
+- Improved responsive styling and documented production persistence considerations.
+
+Copilot was used as a development assistant for code generation, debugging, refactoring suggestions, validation planning, and documentation. All generated suggestions were reviewed, integrated with the existing Blazor structure, and verified with local builds and route checks.
